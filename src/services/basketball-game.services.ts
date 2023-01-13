@@ -29,7 +29,6 @@ class BasketballGameService extends APIService<BasketballGame> {
   async getsLive(): Promise<APIResponseType<BasketballGame[]>> {
     try {
       const { data } = await axios.get(API_BASKETBALL.GETS_LIVE);
-      console.log(data);
       return {
         code: APIResponseCode.SUCCESS,
         data: data,
