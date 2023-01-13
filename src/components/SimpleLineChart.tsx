@@ -51,7 +51,9 @@ const SimpleLineChart: FC<
                 color: '#fff',
               }}
             >
-              <span style={{ padding: GAP }}>{item[0]}</span>
+              <span style={{ padding: GAP }}>
+                {toNumber(item[0]).toFixed(2)}
+              </span>
             </div>
           ) : null}
           {item[1] ? (
@@ -66,7 +68,9 @@ const SimpleLineChart: FC<
                 color: '#fff',
               }}
             >
-              <span style={{ padding: GAP }}>{item[1]}</span>
+              <span style={{ padding: GAP }}>
+                {toNumber(item[1]).toFixed(2)}
+              </span>
             </div>
           ) : null}
         </div>
