@@ -56,8 +56,13 @@ const SimpleLineChart: FC<
               width: `${(Math.abs(Math.min(item[0], 0)) / distance) * 100}%`,
               height: BAR_HEIGHT,
               backgroundColor: '#EA4335',
+              color: '#fff',
+              display: 'flex',
+              justifyContent: 'space-between',
             }}
-          ></div>
+          >
+            <span>{item[0]}</span>
+          </div>
           <div
             style={{
               position: 'absolute',
@@ -66,8 +71,14 @@ const SimpleLineChart: FC<
               width: `${(Math.abs(Math.max(item[1], 0)) / distance) * 100}%`,
               height: BAR_HEIGHT,
               backgroundColor: '#4A86E8',
+              color: '#fff',
+              display: 'flex',
+              justifyContent: 'space-between',
             }}
-          ></div>
+          >
+            <span>0</span>
+            <span>{item[0]}</span>
+          </div>
         </div>
       ))}
     </div>
