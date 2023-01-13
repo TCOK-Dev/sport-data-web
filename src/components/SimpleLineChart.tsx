@@ -35,8 +35,6 @@ const SimpleLineChart: FC<
   //     [marginValue, maxRawValue]
   //   );
 
-  console.log(data, minValue);
-
   return (
     <div style={{ width: '100%' }}>
       {data.map((item, itemIndex) => (
@@ -54,14 +52,11 @@ const SimpleLineChart: FC<
             style={{
               position: 'absolute',
               top: GAP,
-              left: `${toNumber((item[0] - minValue) / distance) * 100}%`,
-              width: `${(Math.abs(Math.min(item[0], 0)) / distance) * 100}%`,
+              left: `${toNumber(marginValue / distance) * 100}%`,
+              width: `${(Math.abs(item[0]) / distance) * 100}%`,
               height: BAR_HEIGHT,
-              backgroundColor: '#EA4335',
+              backgroundColor: '#4A86E8',
               color: '#fff',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
             }}
           >
             <span style={{ padding: GAP }}>{item[0]}</span>
@@ -70,17 +65,13 @@ const SimpleLineChart: FC<
             style={{
               position: 'absolute',
               top: GAP,
-              left: `${Math.abs(toNumber(minValue / distance)) * 100}%`,
-              width: `${(Math.abs(Math.max(item[1], 0)) / distance) * 100}%`,
+              left: `${(Math.abs(item[0]) / distance) * 100}%`,
+              width: `${(Math.abs(item[1]) / distance) * 100}%`,
               height: BAR_HEIGHT,
-              backgroundColor: '#4A86E8',
+              backgroundColor: '#EA4335',
               color: '#fff',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
             }}
           >
-            <span style={{ padding: GAP }}>0</span>
             <span style={{ padding: GAP }}>{item[1]}</span>
           </div>
         </div>

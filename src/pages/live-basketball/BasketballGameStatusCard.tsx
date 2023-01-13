@@ -106,7 +106,7 @@ const BasketballGameStatusCard: FC<
             <SimpleLineChart
               data={[
                 [paces[1], liveProjected[1]],
-                [0, overUnder],
+                [overUnder, 0],
               ]}
             />
           </td>
