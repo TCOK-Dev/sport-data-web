@@ -13,6 +13,7 @@ code {
     monospace;
 }
 
-td {
+td,
+th {
   padding: 8px;
 }

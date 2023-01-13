@@ -53,10 +53,13 @@ const BasketballGameStatusSimpleCard: FC<
         <tr>
           <th></th>
           <th colSpan={2}>
-            <h4>
-              {Math.floor(time).toFixed(0)}:
-              {((time - Math.floor(time)) * 60).toFixed(0)}
-            </h4>
+            <h3 style={{ margin: 0 }}>
+              <b>{data.quarter ?? ''}</b>
+              <span>
+                {Math.floor(time).toFixed(0)}:
+                {((time - Math.floor(time)) * 60).toFixed(0)}
+              </span>
+            </h3>
           </th>
           <th></th>
         </tr>

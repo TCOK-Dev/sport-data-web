@@ -57,14 +57,14 @@ const SimpleLineChart: FC<
             value={item[1] > 0 ? item[1] + item[0] : item[1]}
             min={minValue}
             max={maxValue}
-            label={item[1].toFixed(2)}
+            label={item[1].toFixed(1)}
           />
           <ChartItem
             color={'#4A86E8'}
             value={item[0]}
             min={minValue}
             max={maxValue}
-            label={item[0].toFixed(2)}
+            label={item[0].toFixed(1)}
           />
         </div>
       ))}
