@@ -53,10 +53,10 @@ const BasketballGameStatusSimpleCard: FC<
         <tr>
           <th>
             <h3
-              className={liveVsPaces[1] > 0 ? 'bg-green' : 'bg-red'}
+              className={overUnder > 0 ? 'bg-green' : 'bg-red'}
               style={{ margin: 0 }}
             >
-              {liveVsPaces[1].toFixed(1)}
+              {overUnder.toFixed(1)}
             </h3>
           </th>
           <th colSpan={2}>
@@ -78,10 +78,10 @@ const BasketballGameStatusSimpleCard: FC<
           </th>
           <th>
             <h3
-              className={overUnder > 0 ? 'bg-green' : 'bg-red'}
+              className={liveVsPaces[1] > 0 ? 'bg-green' : 'bg-red'}
               style={{ margin: 0 }}
             >
-              {overUnder.toFixed(1)}
+              {liveVsPaces[1].toFixed(1)}
             </h3>
           </th>
         </tr>
