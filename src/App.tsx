@@ -3,7 +3,7 @@ import LiveBasketball from './pages/live-basketball/LiveBasketball';
 
 function App() {
   return (
-    <div className='container' style={{ padding: 10 }}>
+    <div className='container' style={{ paddingTop: 10 }}>
       <LiveBasketball />
     </div>
   );
