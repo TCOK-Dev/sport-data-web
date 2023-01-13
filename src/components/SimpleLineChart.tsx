@@ -55,7 +55,7 @@ const SimpleLineChart: FC<
           {item.map((itemValue, itemValueIndex) => (
             <ChartItem
               key={itemValue}
-              color={itemIndex ? '#EA4335' : '#4A86E8'}
+              color={itemIndex > 0 ? '#EA4335' : '#4A86E8'}
               value={itemValue}
               min={minValue}
               max={maxValue}
@@ -84,7 +84,7 @@ const ChartItem: FC<
       style={{
         position: 'absolute',
         top: GAP,
-        left: `${(left / distance) * 100}%`,
+        left: `${((left + min) / distance) * 100}%`,
         width: `${(width / distance) * 100}%`,
         height: BAR_HEIGHT,
         backgroundColor: color,
