@@ -21,9 +21,22 @@ const SimpleLineChart: FC<
 
   const marginValue = useMemo(() => maxDistance / 50, [maxDistance]);
 
-  const distance = useMemo(
-    () => maxDistance + marginValue * 2,
-    [marginValue, maxDistance]
+  const minValue = useMemo(
+    () =>
+      data.reduce((ret, cur) => {
+        const min = Math.min(...cur);
+        return ret > min ? min : ret;
+      }, 0) - marginValue,
+    [data, marginValue]
+  );
+
+  const maxValue = useMemo(
+    () =>
+      data.reduce((ret, cur) => {
+        const max = Math.max(...cur);
+        return ret < max ? max : ret;
+      }, 0) + marginValue,
+    [data, marginValue]
   );
 
   return (
@@ -39,44 +52,48 @@ const SimpleLineChart: FC<
             position: 'relative',
           }}
         >
-          {item[0] ? (
-            <div
-              style={{
-                position: 'absolute',
-                top: GAP,
-                left: `${toNumber(marginValue / distance) * 100}%`,
-                width: `${(Math.abs(item[0]) / distance) * 100}%`,
-                height: BAR_HEIGHT,
-                backgroundColor: '#4A86E8',
-                color: '#fff',
-              }}
-            >
-              <span style={{ padding: GAP }}>
-                {toNumber(item[0]).toFixed(2)}
-              </span>
-            </div>
-          ) : null}
-          {item[1] ? (
-            <div
-              style={{
-                position: 'absolute',
-                top: GAP,
-                left: `${(Math.abs(item[0]) / distance) * 100}%`,
-                width: `${(Math.abs(item[1]) / distance) * 100}%`,
-                height: BAR_HEIGHT,
-                backgroundColor: '#EA4335',
-                color: '#fff',
-              }}
-            >
-              <span style={{ padding: GAP }}>
-                {toNumber(item[1]).toFixed(2)}
-              </span>
-            </div>
-          ) : null}
+          {item.map((itemValue, itemValueIndex) => (
+            <ChartItem
+              key={itemValue}
+              color={itemIndex ? '#EA4335' : '#4A86E8'}
+              value={itemValue}
+              min={minValue}
+              max={maxValue}
+            />
+          ))}
         </div>
       ))}
     </div>
   );
+};
+
+const ChartItem: FC<
+  PropsWithChildren<{
+    value?: number;
+    max?: number;
+    min?: number;
+    color?: string;
+  }>
+> = ({ value = 0, max = 0, min = 0, color = '#EA4335' }) => {
+  const distance = useMemo(() => Math.abs(max - min), [max, min]);
+  const width = useMemo(() => Math.abs(value), [value]);
+  const left = useMemo(() => Math.min(0, value), [value]);
+
+  return width ? (
+    <div
+      style={{
+        position: 'absolute',
+        top: GAP,
+        left: `${(left / distance) * 100}%`,
+        width: `${(width / distance) * 100}%`,
+        height: BAR_HEIGHT,
+        backgroundColor: color,
+        color: '#fff',
+      }}
+    >
+      <span style={{ padding: GAP }}>{toNumber(value).toFixed(2)}</span>
+    </div>
+  ) : null;
 };
 
 export default SimpleLineChart;
