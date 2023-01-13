@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useMemo } from 'react';
+import { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
 import { toNumber } from '../utils/math.utils';
 
 const BAR_HEIGHT = 24;
@@ -57,12 +57,14 @@ const SimpleLineChart: FC<
             value={item[1] > 0 ? item[1] + item[0] : item[1]}
             min={minValue}
             max={maxValue}
+            label={item[1]}
           />
           <ChartItem
             color={'#4A86E8'}
             value={item[0]}
             min={minValue}
             max={maxValue}
+            label={item[0]}
           />
         </div>
       ))}
@@ -76,8 +78,9 @@ const ChartItem: FC<
     max?: number;
     min?: number;
     color?: string;
+    label?: ReactNode;
   }>
-> = ({ value = 0, max = 0, min = 0, color = '#EA4335' }) => {
+> = ({ value = 0, max = 0, min = 0, color = '#EA4335', label = null }) => {
   const distance = useMemo(() => Math.abs(max - min), [max, min]);
   const width = useMemo(() => Math.abs(value), [value]);
   const left = useMemo(() => Math.min(0, value), [value]);
@@ -96,7 +99,9 @@ const ChartItem: FC<
         justifyContent: 'flex-end',
       }}
     >
-      <span style={{ padding: GAP }}>{toNumber(value).toFixed(2)}</span>
+      <span style={{ padding: GAP }}>
+        {label ?? toNumber(value).toFixed(2)}
+      </span>
     </div>
   ) : null;
 };
