@@ -105,7 +105,7 @@ const BasketballGameStatusCard: FC<
           <td colSpan={3}>
             <SimpleLineChart
               data={[
-                [paces[1], liveProjected[1]],
+                [paces[1], liveVsPaces[1]],
                 [overUnder, 0],
               ]}
             />
