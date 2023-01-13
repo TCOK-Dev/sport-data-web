@@ -7,7 +7,7 @@ const BasketballGameStatusCard: FC<
   PropsWithChildren<{ data: BasketballGame }>
 > = ({ data }) => {
   const time = useMemo(
-    () => Number(20 - (toNumber(data.clock) % 120) / 60),
+    () => Number((1200 - (toNumber(data.clock) % 1200)) / 60),
     [data.clock]
   );
 
