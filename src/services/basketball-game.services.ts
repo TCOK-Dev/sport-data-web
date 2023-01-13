@@ -14,9 +14,8 @@ class BasketballGameService extends APIService<BasketballGame> {
     try {
       const { data } = await axios.get(API_BASKETBALL.GETS);
       return {
-        code: APIResponseCode.FAILED,
+        code: APIResponseCode.SUCCESS,
         data: data,
-        message: 'Network Connection Problem',
       } as APIResponseType<BasketballGame[]>;
     } catch (error) {
       return {
@@ -30,6 +29,7 @@ class BasketballGameService extends APIService<BasketballGame> {
   async getsLive(): Promise<APIResponseType<BasketballGame[]>> {
     try {
       const { data } = await axios.get(API_BASKETBALL.GETS_LIVE);
+      console.log(data);
       return {
         code: APIResponseCode.SUCCESS,
         data: data,

@@ -9,7 +9,7 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
   const [data, setData] = useState<Array<BasketballGame>>([]);
 
   const loadData = async () => {
-    const res = await basketballGameService.gets();
+    const res = await basketballGameService.getsLive();
 
     if (res.code === APIResponseCode.SUCCESS) {
       setData(res.data ?? []);
