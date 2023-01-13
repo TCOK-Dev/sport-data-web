@@ -60,10 +60,9 @@ const SimpleLineChart: FC<
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              padding: GAP,
             }}
           >
-            <span>{item[0]}</span>
+            <span style={{ padding: GAP }}>{item[0]}</span>
           </div>
           <div
             style={{
@@ -77,11 +76,10 @@ const SimpleLineChart: FC<
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              padding: GAP,
             }}
           >
-            <span>0</span>
-            <span>{item[0]}</span>
+            <span style={{ padding: GAP }}>0</span>
+            <span style={{ padding: GAP }}>{item[1]}</span>
           </div>
         </div>
       ))}
