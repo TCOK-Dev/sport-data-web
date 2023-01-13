@@ -24,9 +24,16 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: 10,
+        flexWrap: 'wrap',
+      }}
+    >
       {data.map((game, gameIndex) => (
-        <div key={gameIndex} style={{ width: 400 }}>
+        <div key={gameIndex} style={{ width: 350 }}>
           <BasketballGameStatusCard data={game} />
         </div>
       ))}
