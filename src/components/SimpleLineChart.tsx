@@ -52,15 +52,18 @@ const SimpleLineChart: FC<
             position: 'relative',
           }}
         >
-          {item.map((itemValue, itemValueIndex) => (
-            <ChartItem
-              key={itemValue}
-              color={itemValueIndex > 0 ? '#EA4335' : '#4A86E8'}
-              value={itemValue}
-              min={minValue}
-              max={maxValue}
-            />
-          ))}
+          <ChartItem
+            color={'#EA4335'}
+            value={item[1] > 0 ? item[1] + item[0] : item[1]}
+            min={minValue}
+            max={maxValue}
+          />
+          <ChartItem
+            color={'#4A86E8'}
+            value={item[0]}
+            min={minValue}
+            max={maxValue}
+          />
         </div>
       ))}
     </div>
