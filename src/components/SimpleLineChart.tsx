@@ -92,6 +92,8 @@ const ChartItem: FC<
         height: BAR_HEIGHT,
         backgroundColor: color,
         color: '#fff',
+        display: 'flex',
+        justifyContent: 'flex-end',
       }}
     >
       <span style={{ padding: GAP }}>{toNumber(value).toFixed(2)}</span>
