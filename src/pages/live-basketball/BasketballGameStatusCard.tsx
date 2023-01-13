@@ -1,4 +1,5 @@
 import React, { FC, PropsWithChildren, useMemo } from 'react';
+import SimpleLineChart from '../../components/SimpleLineChart';
 import { BasketballGame } from '../../types/basketball-game.types';
 import { toNumber } from '../../utils/math.utils';
 
@@ -85,6 +86,18 @@ const BasketballGameStatusCard: FC<
           </td>
           <td className={liveVsPaces[1] > 0 ? 'bg-green' : 'bg-red'}>
             {liveVsPaces[1]}
+          </td>
+        </tr>
+
+        {/* charts */}
+        <tr className='br-green'>
+          <td>
+            <SimpleLineChart
+              data={[
+                [-18, 110],
+                [0, 130],
+              ]}
+            />
           </td>
         </tr>
       </tbody>
