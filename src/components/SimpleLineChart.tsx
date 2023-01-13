@@ -19,8 +19,7 @@ const SimpleLineChart: FC<
     [data]
   );
 
-  // const marginValue = useMemo(() => maxDistance / 10, [maxDistance]);
-  const marginValue = useMemo(() => 0, []);
+  const marginValue = useMemo(() => maxDistance / 50, [maxDistance]);
 
   const distance = useMemo(
     () => maxDistance + marginValue * 2,
@@ -28,7 +27,7 @@ const SimpleLineChart: FC<
   );
 
   return (
-    <div style={{ width: '100%', paddingLeft: 10, paddingRight: 10 }}>
+    <div style={{ width: '100%' }}>
       {data.map((item, itemIndex) => (
         <div
           key={itemIndex}
