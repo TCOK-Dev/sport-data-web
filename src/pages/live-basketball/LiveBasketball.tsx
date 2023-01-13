@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren, useEffect, useState } from 'react';
+import { REFRESH_TIME_INTERVAL } from '../../constants/global';
 import { APIResponseCode } from '../../services/apiResponse';
 import basketballGameService from '../../services/basketball-game.services';
 import { BasketballGame } from '../../types/basketball-game.types';
@@ -14,7 +15,7 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
       setData(res.data ?? []);
     }
 
-    setTimeout(loadData, 1000);
+    setTimeout(loadData, REFRESH_TIME_INTERVAL);
   };
 
   useEffect(() => {
