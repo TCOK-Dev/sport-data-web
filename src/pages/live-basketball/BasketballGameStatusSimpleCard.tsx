@@ -51,7 +51,14 @@ const BasketballGameStatusSimpleCard: FC<
     >
       <thead>
         <tr>
-          <th></th>
+          <th>
+            <h3
+              className={liveVsPaces[1] > 0 ? 'bg-green' : 'bg-red'}
+              style={{ margin: 0 }}
+            >
+              {liveVsPaces[1].toFixed(1)}
+            </h3>
+          </th>
           <th colSpan={2}>
             <h3
               style={{
@@ -69,7 +76,14 @@ const BasketballGameStatusSimpleCard: FC<
               </span>
             </h3>
           </th>
-          <th></th>
+          <th>
+            <h3
+              className={overUnder > 0 ? 'bg-green' : 'bg-red'}
+              style={{ margin: 0 }}
+            >
+              {overUnder.toFixed(1)}
+            </h3>
+          </th>
         </tr>
       </thead>
       <tbody>
