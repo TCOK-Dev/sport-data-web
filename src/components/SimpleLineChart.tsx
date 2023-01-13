@@ -84,11 +84,12 @@ const ChartItem: FC<
       style={{
         position: 'absolute',
         top: GAP,
-        left: `${((left + min) / distance) * 100}%`,
+        left: `${(left / distance) * 100}%`,
         width: `${(width / distance) * 100}%`,
         height: BAR_HEIGHT,
         backgroundColor: color,
         color: '#fff',
+        transform: `translateX(${min / distance}%)`,
       }}
     >
       <span style={{ padding: GAP }}>{toNumber(value).toFixed(2)}</span>
