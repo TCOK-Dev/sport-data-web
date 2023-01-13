@@ -75,24 +75,22 @@ const BasketballGameStatusSimpleCard: FC<
             <h4 style={{ margin: 0 }}>{Math.abs(liveVsPaces[1]).toFixed(1)}</h4>
           </th>
         </tr>
+        <tr>
+          <th className='bg-yellow' style={{ width: '35%' }}>
+            {data.awayTeam}
+          </th>
+          <th className='bg-yellow' style={{ width: '15%' }}>
+            {data.awayScore}
+          </th>
+          <th className='bg-green' style={{ width: '15%' }}>
+            {data.homeScore}
+          </th>
+          <th className='bg-green' style={{ width: '35%' }}>
+            {data.homeTeam}
+          </th>
+        </tr>
       </thead>
       <tbody>
-        {/* yellow section */}
-        <tr>
-          <td className='bg-yellow' width={'35%'}>
-            {data.awayTeam}
-          </td>
-          <td className='bg-yellow' width={'15%'}>
-            {data.awayScore}
-          </td>
-          <td className='bg-green' width={'15%'}>
-            {data.homeScore}
-          </td>
-          <td className='bg-green' width={'35%'}>
-            {data.homeTeam}
-          </td>
-        </tr>
-
         {/* charts */}
         <tr className='br-green'>
           <td colSpan={4}>
