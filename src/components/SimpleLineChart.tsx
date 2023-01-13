@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, useMemo } from 'react';
 import { toNumber } from '../utils/math.utils';
 
 // const BAR_HEIGHT = 16;
-const GAP = 4;
+const GAP = 2;
 
 const SimpleLineChart: FC<
   PropsWithChildren<{ data?: Array<Array<number>> }>
@@ -59,6 +59,7 @@ const SimpleLineChart: FC<
               color: '#fff',
               display: 'flex',
               justifyContent: 'space-between',
+              padding: GAP,
             }}
           >
             <span>{item[0]}</span>
@@ -74,6 +75,7 @@ const SimpleLineChart: FC<
               color: '#fff',
               display: 'flex',
               justifyContent: 'space-between',
+              padding: GAP,
             }}
           >
             <span>0</span>
