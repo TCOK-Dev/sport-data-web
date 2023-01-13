@@ -53,8 +53,16 @@ const BasketballGameStatusSimpleCard: FC<
         <tr>
           <th></th>
           <th colSpan={2}>
-            <h3 style={{ margin: 0 }}>
-              <b>{data.quarter ?? ''}</b>
+            <h3
+              style={{
+                margin: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 15,
+              }}
+            >
+              {data.quarter ? <b>({data.quarter ?? ''})</b> : null}
               <span>
                 {Math.floor(time).toFixed(0)}:
                 {((time - Math.floor(time)) * 60).toFixed(0)}
