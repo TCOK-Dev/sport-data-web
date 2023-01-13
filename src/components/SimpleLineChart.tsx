@@ -84,7 +84,7 @@ const ChartItem: FC<
       style={{
         position: 'absolute',
         top: GAP,
-        left: `${(left / distance) * 100}%`,
+        left: `${((left - min) / distance) * 100}%`,
         width: `${(width / distance) * 100}%`,
         height: BAR_HEIGHT,
         backgroundColor: color,
