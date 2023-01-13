@@ -56,7 +56,9 @@ const BasketballGameStatusCard: FC<
         </tr>
         <tr className='bg-yellow'>
           <td>Time</td>
-          <td>{time.toFixed(2)}</td>
+          <td>
+            {time.toFixed(0)}:{((time - Math.floor(time)) * 60).toFixed(0)}
+          </td>
           <td></td>
         </tr>
         <tr className='bg-yellow'>
@@ -93,10 +95,10 @@ const BasketballGameStatusCard: FC<
         <tr>
           <td className='bg-green'>Live vs Pace</td>
           <td className={liveVsPaces[0] > 0 ? 'bg-green' : 'bg-red'}>
-            {liveVsPaces[0].toFixed(2)}
+            {Math.abs(liveVsPaces[0]).toFixed(2)}
           </td>
           <td className={liveVsPaces[1] > 0 ? 'bg-green' : 'bg-red'}>
-            {liveVsPaces[1].toFixed(2)}
+            {Math.abs(liveVsPaces[1]).toFixed(2)}
           </td>
         </tr>
 
