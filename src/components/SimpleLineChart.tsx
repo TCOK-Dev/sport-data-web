@@ -33,7 +33,7 @@ const SimpleLineChart: FC<
   const maxValue = useMemo(
     () =>
       data.reduce((ret, cur) => {
-        const max = Math.max(...cur);
+        const max = cur[0] + cur[1];
         return ret < max ? max : ret;
       }, 0) + marginValue,
     [data, marginValue]
