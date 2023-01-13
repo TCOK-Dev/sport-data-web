@@ -91,7 +91,7 @@ const BasketballGameStatusCard: FC<
 
         {/* charts */}
         <tr className='br-green'>
-          <td>
+          <td colSpan={3}>
             <SimpleLineChart
               data={[
                 [-18, 110],

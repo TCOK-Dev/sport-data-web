@@ -52,8 +52,8 @@ const SimpleLineChart: FC<
             style={{
               position: 'absolute',
               top: GAP,
-              left: `${toNumber(marginValue / distance)}%`,
-              width: `${Math.abs(Math.min(item[0], 0)) / distance}%`,
+              left: `${toNumber(marginValue / distance) * 100}%`,
+              width: `${(Math.abs(Math.min(item[0], 0)) / distance) * 100}%`,
               height: BAR_HEIGHT,
               backgroundColor: '#EA4335',
             }}
@@ -62,8 +62,8 @@ const SimpleLineChart: FC<
             style={{
               position: 'absolute',
               top: GAP,
-              left: `${toNumber(minValue / distance)}%`,
-              width: `${Math.abs(Math.max(item[1], 0)) / distance}%`,
+              left: `${toNumber(minValue / distance) * 100}%`,
+              width: `${(Math.abs(Math.max(item[1], 0)) / distance) * 100}%`,
               height: BAR_HEIGHT,
               backgroundColor: '#4A86E8',
             }}
