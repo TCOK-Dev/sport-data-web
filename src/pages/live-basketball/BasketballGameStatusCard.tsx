@@ -57,7 +57,8 @@ const BasketballGameStatusCard: FC<
         <tr className='bg-yellow'>
           <td>Time</td>
           <td>
-            {time.toFixed(0)}:{((time - Math.floor(time)) * 60).toFixed(0)}
+            {time} {time.toFixed(0)}:
+            {((time - Math.floor(time)) * 60).toFixed(0)}
           </td>
           <td></td>
         </tr>
