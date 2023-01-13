@@ -12,7 +12,10 @@ class BasketballService extends APIService<Basketball> {
   async gets(): Promise<APIResponseType<Basketball[]>> {
     try {
       const { data } = await axios.get(API_BASKETBALL.GETS);
-      return data as APIResponseType<Basketball[]>;
+      return {
+        code: APIResponseCode.SUCCESS,
+        data: data,
+      } as APIResponseType<Basketball[]>;
     } catch (error) {
       return {
         code: APIResponseCode.FAILED,
@@ -29,7 +32,10 @@ class BasketballService extends APIService<Basketball> {
   }): Promise<APIResponseType<Basketball>> {
     try {
       const { data } = await axios.get(`${API_BASKETBALL.GET}/${id}`);
-      return data as APIResponseType<Basketball>;
+      return {
+        code: APIResponseCode.SUCCESS,
+        data: data,
+      } as APIResponseType<Basketball>;
     } catch (error) {
       return {
         code: APIResponseCode.FAILED,
