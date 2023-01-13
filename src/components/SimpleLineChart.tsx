@@ -7,33 +7,24 @@ const GAP = 2;
 const SimpleLineChart: FC<
   PropsWithChildren<{ data?: Array<Array<number>> }>
 > = ({ data = [] }) => {
-  const minRawValue = useMemo(
-    () => data.reduce((ret, cur) => (ret > cur[0] ? cur[0] : ret), 0),
+  const maxDistance = useMemo(
+    () =>
+      data.reduce(
+        (ret, cur) =>
+          ret < Math.abs(cur[0]) + Math.abs(cur[1])
+            ? Math.abs(cur[0]) + Math.abs(cur[1])
+            : ret,
+        0
+      ),
     [data]
   );
-  const maxRawValue = useMemo(
-    () => data.reduce((ret, cur) => (ret < cur[1] ? cur[1] : ret), 0),
-    [data]
+
+  const marginValue = useMemo(() => maxDistance / 10, [maxDistance]);
+
+  const distance = useMemo(
+    () => maxDistance + marginValue * 2,
+    [marginValue, maxDistance]
   );
-
-  const distanceRaw = useMemo(
-    () => Math.abs(maxRawValue - minRawValue),
-    [maxRawValue, minRawValue]
-  );
-
-  const marginValue = useMemo(() => distanceRaw / 10, [distanceRaw]);
-
-  const distance = useMemo(() => (distanceRaw * 6) / 5, [distanceRaw]);
-
-  const minValue = useMemo(
-    () => minRawValue - marginValue,
-    [marginValue, minRawValue]
-  );
-
-  //   const maxValue = useMemo(
-  //     () => maxRawValue + marginValue,
-  //     [marginValue, maxRawValue]
-  //   );
 
   return (
     <div style={{ width: '100%' }}>
