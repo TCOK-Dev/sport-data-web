@@ -12,10 +12,10 @@ const BasketballGameStatusCard: FC<
   const time = useMemo(() => {
     const playedSeconds = isNBA
       ? // quarter 12min * 4
-        (toNumber(data.quarter?.[0]) - 1) * 720 + toNumber(data.clock)
+        (toNumber(data.quarter?.[0]) - 1) * 720 + (720 - toNumber(data.clock))
       : isCG
       ? // half 20min * 2
-        (toNumber(data.quarter?.[0]) - 1) * 1200 + toNumber(data.clock)
+        (toNumber(data.quarter?.[0]) - 1) * 1200 + (1200 - toNumber(data.clock))
       : 0;
     return playedSeconds / 60;
   }, [data.clock, data.quarter, isCG, isNBA]);

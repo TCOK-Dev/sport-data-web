@@ -12,10 +12,10 @@ const BasketballGameStatusSimpleCard: FC<
   const time = useMemo(() => {
     const playedSeconds = isNBA
       ? // quarter 12min * 4
-        (toNumber(data.quarter?.[0]) - 1) * 720 + toNumber(data.clock)
+        (toNumber(data.quarter?.[0]) - 1) * 720 + (720 - toNumber(data.clock))
       : isCG
       ? // half 20min * 2
-        (toNumber(data.quarter?.[0]) - 1) * 1200 + toNumber(data.clock)
+        (toNumber(data.quarter?.[0]) - 1) * 1200 + (1200 - toNumber(data.clock))
       : 0;
     return playedSeconds / 60;
   }, [data.clock, data.quarter, isCG, isNBA]);
@@ -64,10 +64,18 @@ const BasketballGameStatusSimpleCard: FC<
       <tbody>
         {/* yellow section */}
         <tr>
-          <td className='bg-yellow'>{data.awayTeam}</td>
-          <td className='bg-yellow'>{data.awayScore}</td>
-          <td className='bg-green'>{data.homeScore}</td>
-          <td className='bg-green'>{data.homeTeam}</td>
+          <td className='bg-yellow' width={'35%'}>
+            {data.awayTeam}
+          </td>
+          <td className='bg-yellow' width={'15%'}>
+            {data.awayScore}
+          </td>
+          <td className='bg-green' width={'15%'}>
+            {data.homeScore}
+          </td>
+          <td className='bg-green' width={'35%'}>
+            {data.homeTeam}
+          </td>
         </tr>
 
         {/* charts */}
