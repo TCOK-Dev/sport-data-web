@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useMemo } from 'react';
 import { toNumber } from '../utils/math.utils';
 
-// const BAR_HEIGHT = 16;
+const BAR_HEIGHT = 24;
 const GAP = 2;
 
 const SimpleLineChart: FC<
@@ -41,7 +41,7 @@ const SimpleLineChart: FC<
         <div
           key={itemIndex}
           style={{
-            // height: BAR_HEIGHT + GAP * 2,
+            height: BAR_HEIGHT + GAP * 2,
             width: '100%',
             marginBottom: GAP,
             marginTop: GAP,
@@ -54,11 +54,12 @@ const SimpleLineChart: FC<
               top: GAP,
               left: `${toNumber(marginValue / distance) * 100}%`,
               width: `${(Math.abs(Math.min(item[0], 0)) / distance) * 100}%`,
-              //   height: BAR_HEIGHT,
+              height: BAR_HEIGHT,
               backgroundColor: '#EA4335',
               color: '#fff',
               display: 'flex',
               justifyContent: 'space-between',
+              alignItems: 'center',
               padding: GAP,
             }}
           >
@@ -70,11 +71,12 @@ const SimpleLineChart: FC<
               top: GAP,
               left: `${Math.abs(toNumber(minValue / distance)) * 100}%`,
               width: `${(Math.abs(Math.max(item[1], 0)) / distance) * 100}%`,
-              //   height: BAR_HEIGHT,
+              height: BAR_HEIGHT,
               backgroundColor: '#4A86E8',
               color: '#fff',
               display: 'flex',
               justifyContent: 'space-between',
+              alignItems: 'center',
               padding: GAP,
             }}
           >
