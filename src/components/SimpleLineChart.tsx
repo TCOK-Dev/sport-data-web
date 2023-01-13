@@ -55,7 +55,7 @@ const SimpleLineChart: FC<
           {item.map((itemValue, itemValueIndex) => (
             <ChartItem
               key={itemValue}
-              color={itemIndex > 0 ? '#EA4335' : '#4A86E8'}
+              color={itemValueIndex > 0 ? '#EA4335' : '#4A86E8'}
               value={itemValue}
               min={minValue}
               max={maxValue}
