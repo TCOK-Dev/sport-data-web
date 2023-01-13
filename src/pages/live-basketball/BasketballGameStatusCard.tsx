@@ -6,17 +6,30 @@ import { toNumber } from '../../utils/math.utils';
 const BasketballGameStatusCard: FC<
   PropsWithChildren<{ data: BasketballGame }>
 > = ({ data }) => {
+  const time = useMemo(
+    () => Number(20 - (toNumber(data.clock) % 120) / 60),
+    [data.clock]
+  );
+
   const overUnder = useMemo(
-    () => (data.awayOverUnder ?? '').split(' ')?.[0] ?? '',
+    () => toNumber((data.awayOverUnder ?? '').split(' ')?.[0] ?? ''),
     [data.awayOverUnder]
   );
 
-  const paces = [2.8, 110.0];
-  const liveProjected = [3.3, 133.0];
-  const liveVsPaces = [
-    toNumber(paces[0]) - toNumber(liveProjected[0]),
-    toNumber(paces[1]) - toNumber(liveProjected[1]),
-  ];
+  const paces = useMemo(() => {
+    const pace = (toNumber(data.awayScore) + toNumber(data.homeScore)) / time;
+    return [pace, pace * 40];
+  }, [data.awayScore, data.homeScore, time]);
+
+  const liveProjected = useMemo(() => [overUnder / 40, overUnder], [overUnder]);
+
+  const liveVsPaces = useMemo(
+    () => [
+      toNumber(paces[0]) - toNumber(liveProjected[0]),
+      toNumber(paces[1]) - toNumber(liveProjected[1]) + 5,
+    ],
+    [liveProjected, paces]
+  );
 
   return (
     <table
@@ -38,12 +51,12 @@ const BasketballGameStatusCard: FC<
         {/* yellow section */}
         <tr className='bg-yellow'>
           <td>Over / Under Live</td>
-          <td>{overUnder}</td>
+          <td>{overUnder.toFixed(2)}</td>
           <td></td>
         </tr>
         <tr className='bg-yellow'>
           <td>Time</td>
-          <td>{data.clock}</td>
+          <td>{time.toFixed(2)}</td>
           <td></td>
         </tr>
         <tr className='bg-yellow'>
@@ -60,32 +73,30 @@ const BasketballGameStatusCard: FC<
         {/* total */}
         <tr>
           <td className='bg-green'>Mins</td>
-          <td className='bg-gray'>
-            {Math.abs(toNumber(data.awayScore) - toNumber(data.homeScore))}
-          </td>
+          <td className='bg-gray'>1</td>
           <td className='bg-gray'>40</td>
         </tr>
 
         {/* Pace, Live Projected */}
         <tr>
           <td>Pace</td>
-          <td>{paces[0]}</td>
-          <td>{paces[1]}</td>
+          <td>{paces[0].toFixed(2)}</td>
+          <td>{paces[1].toFixed(2)}</td>
         </tr>
         <tr>
           <td>Live Projected</td>
-          <td>{liveProjected[0]}</td>
-          <td>{liveProjected[1]}</td>
+          <td>{liveProjected[0].toFixed(2)}</td>
+          <td>{liveProjected[1].toFixed(2)}</td>
         </tr>
 
         {/* total */}
         <tr>
           <td className='bg-green'>Live vs Pace</td>
           <td className={liveVsPaces[0] > 0 ? 'bg-green' : 'bg-red'}>
-            {liveVsPaces[0]}
+            {liveVsPaces[0].toFixed(2)}
           </td>
           <td className={liveVsPaces[1] > 0 ? 'bg-green' : 'bg-red'}>
-            {liveVsPaces[1]}
+            {liveVsPaces[1].toFixed(2)}
           </td>
         </tr>
 
@@ -94,8 +105,8 @@ const BasketballGameStatusCard: FC<
           <td colSpan={3}>
             <SimpleLineChart
               data={[
-                [-18, 110],
-                [0, 130],
+                [paces[1], liveProjected[1]],
+                [0, overUnder],
               ]}
             />
           </td>
