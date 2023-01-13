@@ -93,10 +93,10 @@ const BasketballGameStatusCard: FC<
 
         {/* total */}
         <tr>
-          <td className='bg-green'>Live vs Pace</td>
           <td className={liveVsPaces[0] > 0 ? 'bg-green' : 'bg-red'}>
-            {Math.abs(liveVsPaces[0]).toFixed(2)}
+            Live vs Pace
           </td>
+          <td>{Math.abs(liveVsPaces[0]).toFixed(2)}</td>
           <td className={liveVsPaces[1] > 0 ? 'bg-green' : 'bg-red'}>
             {Math.abs(liveVsPaces[1]).toFixed(2)}
           </td>
