@@ -3,7 +3,7 @@ import { REFRESH_TIME_INTERVAL } from '../../constants/global';
 import { APIResponseCode } from '../../services/apiResponse';
 import basketballGameService from '../../services/basketball-game.services';
 import { BasketballGame } from '../../types/basketball-game.types';
-import BasketballGameStatusCard from './BasketballGameStatusCard';
+import BasketballGameStatusSimpleCard from './BasketballGameStatusSimpleCard';
 
 const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
   const [data, setData] = useState<Array<BasketballGame>>([]);
@@ -34,7 +34,7 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
     >
       {data.map((game, gameIndex) => (
         <div key={gameIndex} style={{ width: 350 }}>
-          <BasketballGameStatusCard data={game} />
+          <BasketballGameStatusSimpleCard data={game} />
         </div>
       ))}
     </div>
