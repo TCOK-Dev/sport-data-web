@@ -39,32 +39,36 @@ const SimpleLineChart: FC<
             position: 'relative',
           }}
         >
-          <div
-            style={{
-              position: 'absolute',
-              top: GAP,
-              left: `${toNumber(marginValue / distance) * 100}%`,
-              width: `${(Math.abs(item[0]) / distance) * 100}%`,
-              height: BAR_HEIGHT,
-              backgroundColor: '#4A86E8',
-              color: '#fff',
-            }}
-          >
-            <span style={{ padding: GAP }}>{item[0]}</span>
-          </div>
-          <div
-            style={{
-              position: 'absolute',
-              top: GAP,
-              left: `${(Math.abs(item[0]) / distance) * 100}%`,
-              width: `${(Math.abs(item[1]) / distance) * 100}%`,
-              height: BAR_HEIGHT,
-              backgroundColor: '#EA4335',
-              color: '#fff',
-            }}
-          >
-            <span style={{ padding: GAP }}>{item[1]}</span>
-          </div>
+          {item[0] ? (
+            <div
+              style={{
+                position: 'absolute',
+                top: GAP,
+                left: `${toNumber(marginValue / distance) * 100}%`,
+                width: `${(Math.abs(item[0]) / distance) * 100}%`,
+                height: BAR_HEIGHT,
+                backgroundColor: '#4A86E8',
+                color: '#fff',
+              }}
+            >
+              <span style={{ padding: GAP }}>{item[0]}</span>
+            </div>
+          ) : null}
+          {item[1] ? (
+            <div
+              style={{
+                position: 'absolute',
+                top: GAP,
+                left: `${(Math.abs(item[0]) / distance) * 100}%`,
+                width: `${(Math.abs(item[1]) / distance) * 100}%`,
+                height: BAR_HEIGHT,
+                backgroundColor: '#EA4335',
+                color: '#fff',
+              }}
+            >
+              <span style={{ padding: GAP }}>{item[1]}</span>
+            </div>
+          ) : null}
         </div>
       ))}
     </div>
