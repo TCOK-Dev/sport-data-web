@@ -89,7 +89,6 @@ const ChartItem: FC<
         height: BAR_HEIGHT,
         backgroundColor: color,
         color: '#fff',
-        transform: `translateX(${(min / distance) * 100}%)`,
       }}
     >
       <span style={{ padding: GAP }}>{toNumber(value).toFixed(2)}</span>
