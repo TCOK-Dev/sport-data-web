@@ -6,10 +6,19 @@ import { toNumber } from '../../utils/math.utils';
 const BasketballGameStatusCard: FC<
   PropsWithChildren<{ data: BasketballGame }>
 > = ({ data }) => {
-  const time = useMemo(
-    () => Number((1200 - (toNumber(data.clock) % 1200)) / 60),
-    [data.clock]
-  );
+  const isNBA = useMemo(() => data.quarter?.[1] === 'Q', [data.quarter]);
+  const isCG = useMemo(() => data.quarter?.[1] === 'H', [data.quarter]);
+
+  const time = useMemo(() => {
+    const playedSeconds = isNBA
+      ? // quarter 12min * 4
+        (toNumber(data.quarter?.[0]) - 1) * 720 + toNumber(data.clock)
+      : isCG
+      ? // half 20min * 2
+        (toNumber(data.quarter?.[0]) - 1) * 1200 + toNumber(data.clock)
+      : 0;
+    return playedSeconds / 60;
+  }, [data.clock, data.quarter, isCG, isNBA]);
 
   const overUnder = useMemo(
     () => toNumber((data.awayOverUnder ?? '').split(' ')?.[0] ?? ''),
