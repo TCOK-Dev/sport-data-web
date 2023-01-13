@@ -62,7 +62,7 @@ const SimpleLineChart: FC<
             style={{
               position: 'absolute',
               top: GAP,
-              left: `${toNumber(minValue / distance) * 100}%`,
+              left: `${Math.abs(toNumber(minValue / distance)) * 100}%`,
               width: `${(Math.abs(Math.max(item[1], 0)) / distance) * 100}%`,
               height: BAR_HEIGHT,
               backgroundColor: '#4A86E8',
