@@ -1,11 +1,17 @@
+import { Container } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './App.css';
 import LiveBasketball from './pages/live-basketball/LiveBasketball';
 
+const theme = createTheme({});
+
 function App() {
   return (
-    <div className='container' style={{ paddingTop: 10 }}>
-      <LiveBasketball />
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <LiveBasketball />
+      </Container>
+    </ThemeProvider>
   );
 }
 

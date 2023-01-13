@@ -1,12 +1,21 @@
-import { FC, PropsWithChildren, useEffect, useState } from 'react';
+import { FC, PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import TabsContainer from '../../components/TabsContainer';
 import { REFRESH_TIME_INTERVAL } from '../../constants/global';
 import { APIResponseCode } from '../../services/apiResponse';
 import basketballGameService from '../../services/basketball-game.services';
 import { BasketballGame } from '../../types/basketball-game.types';
-import BasketballGameStatusSimpleCard from './BasketballGameStatusSimpleCard';
+import BasketballGameList from './BasketballGameList';
 
 const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
   const [data, setData] = useState<Array<BasketballGame>>([]);
+
+  const nbaGames: Array<BasketballGame> = useMemo(() => {
+    return data.filter((game) => game.quarter?.[1] === 'Q');
+  }, [data]);
+
+  const cgGames: Array<BasketballGame> = useMemo(() => {
+    return data.filter((game) => game.quarter?.[1] === 'H');
+  }, [data]);
 
   const loadData = async () => {
     const res = await basketballGameService.getsLive();
@@ -24,20 +33,18 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: 10,
-        flexWrap: 'wrap',
-      }}
-    >
-      {data.map((game, gameIndex) => (
-        <div key={gameIndex} style={{ width: 350 }}>
-          <BasketballGameStatusSimpleCard data={game} />
-        </div>
-      ))}
-    </div>
+    <TabsContainer
+      data={[
+        {
+          label: 'NBA',
+          node: <BasketballGameList data={nbaGames} />,
+        },
+        {
+          label: 'College',
+          node: <BasketballGameList data={cgGames} />,
+        },
+      ]}
+    />
   );
 };
 
