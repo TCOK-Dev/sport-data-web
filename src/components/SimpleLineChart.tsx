@@ -35,6 +35,8 @@ const SimpleLineChart: FC<
   //     [marginValue, maxRawValue]
   //   );
 
+  console.log(data, minValue);
+
   return (
     <div style={{ width: '100%' }}>
       {data.map((item, itemIndex) => (

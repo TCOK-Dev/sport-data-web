@@ -32,7 +32,7 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
         flexWrap: 'wrap',
       }}
     >
-      {data.map((game, gameIndex) => (
+      {data.slice(0, 1).map((game, gameIndex) => (
         <div key={gameIndex} style={{ width: 350 }}>
           <BasketballGameStatusCard data={game} />
         </div>
