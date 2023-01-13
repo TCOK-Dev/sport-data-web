@@ -28,7 +28,7 @@ class BasketballService extends APIService<Basketball> {
     id?: string;
   }): Promise<APIResponseType<Basketball>> {
     try {
-      const { data } = await axios.get(API_BASKETBALL.GET, { params: { id } });
+      const { data } = await axios.get(`${API_BASKETBALL.GET}/${id}`);
       return data as APIResponseType<Basketball>;
     } catch (error) {
       return {
