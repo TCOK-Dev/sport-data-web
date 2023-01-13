@@ -9,7 +9,7 @@ const BasketballGameList: FC<
   return (
     <Grid container spacing={2}>
       {data.map((game, gameIndex) => (
-        <Grid item key={gameIndex} lg={3} md={4} sm={6} xs={12}>
+        <Grid item key={gameIndex} lg={4} md={4} sm={6} xs={12}>
           <BasketballGameStatusSimpleCard data={game} />
         </Grid>
       ))}
