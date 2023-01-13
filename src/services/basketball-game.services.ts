@@ -5,6 +5,7 @@ import axios from './axios';
 
 const API_BASKETBALL = {
   GETS: 'basketball-game',
+  GETS_LIVE: 'basketball-game/live',
   GET: 'basketball-game',
 };
 
@@ -12,6 +13,19 @@ class BasketballGameService extends APIService<BasketballGame> {
   async gets(): Promise<APIResponseType<BasketballGame[]>> {
     try {
       const { data } = await axios.get(API_BASKETBALL.GETS);
+      return data as APIResponseType<BasketballGame[]>;
+    } catch (error) {
+      return {
+        code: APIResponseCode.FAILED,
+        data: [],
+        message: 'Network Connection Problem',
+      };
+    }
+  }
+
+  async getsLive(): Promise<APIResponseType<BasketballGame[]>> {
+    try {
+      const { data } = await axios.get(API_BASKETBALL.GETS_LIVE);
       return data as APIResponseType<BasketballGame[]>;
     } catch (error) {
       return {
