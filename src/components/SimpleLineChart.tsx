@@ -7,8 +7,6 @@ const GAP = 2;
 const SimpleLineChart: FC<
   PropsWithChildren<{ data?: Array<Array<number>> }>
 > = ({ data = [] }) => {
-  console.log(data);
-
   const minRawValue = useMemo(
     () => data.reduce((ret, cur) => (ret > cur[0] ? cur[0] : ret), 0),
     [data]
