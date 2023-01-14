@@ -40,6 +40,21 @@ export function LineChart({
     },
     cornerRadius: 4,
     maintainAspectRatio: false,
+    scales: {
+      x: {
+        ticks: {
+          color: '#828B9B', // not 'fontColor:' anymore
+          // Include a dollar sign in the ticks
+          callback: function (value: any, index: any, ticks: any) {
+            return ;
+          },
+        },
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+      },
+    },
   };
 
   const chartData: ChartData<'line', (number | [number, number] | null)[]> = {

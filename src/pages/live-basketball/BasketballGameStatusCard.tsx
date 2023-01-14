@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren, useMemo } from 'react';
 import SimpleLineChart from '../../components/SimpleLineChart';
 import { BasketballGame } from '../../types/basketball-game.types';
-import { toNumber } from '../../utils/math.utils';
+import { secs2Mins, toNumber } from '../../utils/math.utils';
 
 const BasketballGameStatusCard: FC<
   PropsWithChildren<{ data: BasketballGame }>
@@ -65,10 +65,7 @@ const BasketballGameStatusCard: FC<
         </tr>
         <tr className='bg-yellow'>
           <td>Time</td>
-          <td>
-            {Math.floor(time).toFixed(0)} :{' '}
-            {((time - Math.floor(time)) * 60).toFixed(0)}
-          </td>
+          <td>{secs2Mins(time)}</td>
           <td></td>
         </tr>
         <tr className='bg-yellow'>

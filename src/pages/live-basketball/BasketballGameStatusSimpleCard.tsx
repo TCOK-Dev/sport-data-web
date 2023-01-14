@@ -2,24 +2,14 @@ import { FC, PropsWithChildren, useMemo } from 'react';
 import { LineChart } from '../../components/LineChart';
 import SimpleLineChart from '../../components/SimpleLineChart';
 import { BasketballGame } from '../../types/basketball-game.types';
-import { toNumber } from '../../utils/math.utils';
+import { secs2Mins, toNumber } from '../../utils/math.utils';
 
 const BasketballGameStatusSimpleCard: FC<
   PropsWithChildren<{ data: BasketballGame }>
 > = ({ data }) => {
-  const isNBA = useMemo(() => data.quarter?.[1] === 'Q', [data.quarter]);
-  const isCG = useMemo(() => data.quarter?.[1] === 'H', [data.quarter]);
-
   const time = useMemo(() => {
-    const playedSeconds = isNBA
-      ? // quarter 12min * 4
-        (toNumber(data.quarter?.[0]) - 1) * 720 + (720 - toNumber(data.clock))
-      : isCG
-      ? // half 20min * 2
-        (toNumber(data.quarter?.[0]) - 1) * 1200 + (1200 - toNumber(data.clock))
-      : 0;
-    return playedSeconds / 60;
-  }, [data.clock, data.quarter, isCG, isNBA]);
+    return data.playedTime / 60;
+  }, [data.playedTime]);
 
   const overUnder = useMemo(
     () => toNumber((data.awayOverUnder ?? '').split(' ')?.[0] ?? ''),
@@ -66,10 +56,7 @@ const BasketballGameStatusSimpleCard: FC<
               }}
             >
               {data.quarter ? <b>({data.quarter ?? ''})</b> : null}
-              <span>
-                {Math.floor(time).toFixed(0)}:
-                {((time - Math.floor(time)) * 60).toFixed(0)}
-              </span>
+              <span>{secs2Mins(time)}</span>
             </h3>
           </th>
           <th className={liveVsPaces[1] > 0 ? 'bg-green' : 'bg-red'}>
