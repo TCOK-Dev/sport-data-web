@@ -111,6 +111,18 @@ const BasketballGameStatusSimpleCard: FC<
                   label: 'Away Score',
                   data: (data.scores ?? []).map((item) => item.awayScore),
                 },
+                {
+                  label: 'Home Score',
+                  data: (data.scores ?? []).map((item) => item.homeScore),
+                },
+                {
+                  label: 'Starting Over/Under',
+                  data: (data.scores ?? []).map((item) => overUnder),
+                },
+                {
+                  label: 'Pace',
+                  data: (data.scores ?? []).map((item) => paces[1]),
+                },
               ]}
             />
           </td>
