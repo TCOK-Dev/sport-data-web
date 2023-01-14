@@ -5,6 +5,7 @@ export interface BasketballGameScore {
   title: string;
   quarter: string;
   clock: number;
+  playedTime: number;
   awayTeam: string;
   homeTeam: string;
   awayScore: number;

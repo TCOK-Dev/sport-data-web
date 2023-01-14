@@ -2,6 +2,7 @@ import {
   BarElement,
   CategoryScale,
   Chart as ChartJS,
+  ChartData,
   Legend,
   LinearScale,
   LineElement,
@@ -25,11 +26,11 @@ ChartJS.register(
 );
 
 export function LineChart({
-  data: propsData = [],
-  title = '',
+  data = [],
+  labels = [],
 }: {
   data: Array<{ label: string; data: Array<number> }>;
-  title?: string;
+  labels?: Array<number | string>;
 }) {
   const options: any = {
     responsive: true,
@@ -39,53 +40,16 @@ export function LineChart({
     },
     cornerRadius: 4,
     maintainAspectRatio: false,
-    plugins: {
-      // legend: {
-      //   display: false,
-      // },
-      title: {
-        display: true,
-        color: '#000',
-        text: title,
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: '#828B9B', // not 'fontColor:' anymore
-        },
-        grid: {
-          display: false,
-          drawBorder: false,
-        },
-      },
-      y: {
-        ticks: {
-          stepSize: 1,
-          color: '#828B9B',
-          beginAtZero: true,
-        },
-        grid: {
-          drawBorder: false,
-          color: '#f2f2f2',
-        },
-      },
-    },
   };
 
-  const data: any = {
-    labels: propsData.map((d: any) => {
-      return d.label;
-    }),
-    datasets: propsData.map((d: any) => ({
+  const chartData: ChartData<'line', (number | [number, number] | null)[]> = {
+    labels: labels,
+    datasets: data.map((d) => ({
       type: 'line' as const,
-      label: 'Total Amount',
+      label: d.label,
       data: d.data,
-      backgroundColor: '#536DFE',
-      borderColor: '#536DFE',
-      yAxisID: 'y1',
     })),
   };
 
-  return <Chart type='bar' options={options} data={data} />;
+  return <Chart type='line' options={options} data={chartData} />;
 }

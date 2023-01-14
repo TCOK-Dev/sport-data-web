@@ -106,6 +106,7 @@ const BasketballGameStatusSimpleCard: FC<
         <tr className='br-green'>
           <td colSpan={4}>
             <LineChart
+              labels={(data.scores ?? []).map((item) => item.playedTime)}
               data={[
                 {
                   label: 'Away Score',
