@@ -53,7 +53,7 @@ export function LineChart({
         (ret, axis, axisIndex) => ({
           ...ret,
           [`y${axisIndex + 1}`]: {
-            position: axisIndex === 0 ? 'left' : 'right',
+            position: axisIndex === 0 ? ('left' as const) : ('right' as const),
           },
         }),
         {}
@@ -63,7 +63,7 @@ export function LineChart({
 
   const chartData: ChartData<'line', (number | [number, number] | null)[]> = {
     labels: labels,
-    datasets: data.reduce(
+    datasets: data.slice(0, 2).reduce(
       (ret, axis, axisIndex) => [
         ...ret,
         ...axis.map((d) => ({

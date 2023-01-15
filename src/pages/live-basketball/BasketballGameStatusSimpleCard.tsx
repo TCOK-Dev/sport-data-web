@@ -92,7 +92,7 @@ const BasketballGameStatusSimpleCard: FC<
           </td>
         </tr>
         <tr className='br-green'>
-          <td colSpan={4}>
+          <td colSpan={4} style={{ height: 300 }}>
             <LineChart
               labels={(data.scores ?? []).map((item) => item.playedTime)}
               data={[
