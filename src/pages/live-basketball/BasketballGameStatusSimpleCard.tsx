@@ -13,6 +13,12 @@ const extractPace = (data: BasketballGame | BasketballGameScore) =>
   (toNumber(data.awayScore) + toNumber(data.homeScore)) /
   (toNumber(data.playedTime) / 60);
 
+const extractTotalPace = (data: BasketballGame | BasketballGameScore) => {
+  const isNBA = data.quarter?.[1] === 'Q';
+  const isCG = data.quarter?.[1] === 'H';
+  return extractPace(data) * (isNBA ? 48 : isCG ? 40 : 40);
+};
+
 const BasketballGameStatusSimpleCard: FC<
   PropsWithChildren<{ data: BasketballGame }>
 > = ({ data }) => {
@@ -23,8 +29,7 @@ const BasketballGameStatusSimpleCard: FC<
   const overUnder = useMemo(() => extractOverUnder(data), [data]);
 
   const paces = useMemo(() => {
-    const pace = extractPace(data);
-    return [pace, pace * 40];
+    return [extractPace(data), extractTotalPace(data)];
   }, [data]);
 
   const liveProjected = useMemo(() => [overUnder / 40, overUnder], [overUnder]);
@@ -127,7 +132,7 @@ const BasketballGameStatusSimpleCard: FC<
                   },
                   {
                     label: 'Pace',
-                    data: chartData.map((item) => extractPace(item) * 40),
+                    data: chartData.map((item) => extractTotalPace(item)),
                   },
                 ],
               ]}
