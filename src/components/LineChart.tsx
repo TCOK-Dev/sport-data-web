@@ -87,7 +87,7 @@ export function LineChart({
       (ret, axis, axisIndex) => [
         ...ret,
         ...axis.map((d) => ({
-          type: 'line' as const,
+          type: axisIndex ? ('line' as const) : ('bar' as const),
           label: d.label,
           data: d.data,
           yAxisID: axisIndex ? `y${axisIndex}` : 'y',
