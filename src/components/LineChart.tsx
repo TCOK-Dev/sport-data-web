@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
+import { secs2Mins } from '../utils/math.utils';
 
 ChartJS.register(
   CategoryScale,
@@ -29,7 +30,7 @@ export function LineChart({
   data = [],
   labels = [],
 }: {
-  data: Array<{ label: string; data: Array<number> }>;
+  data: Array<Array<{ label: string; data: Array<number> }>>;
   labels?: Array<number | string>;
 }) {
   const options: any = {
@@ -43,27 +44,37 @@ export function LineChart({
     scales: {
       x: {
         ticks: {
-          color: '#828B9B', // not 'fontColor:' anymore
-          // Include a dollar sign in the ticks
           callback: function (value: any, index: any, ticks: any) {
-            return ;
+            return secs2Mins(value);
           },
         },
-        grid: {
-          display: false,
-          drawBorder: false,
-        },
       },
+      ...data.slice(0, 2).reduce(
+        (ret, axis, axisIndex) => ({
+          ...ret,
+          [`y${axisIndex + 1}`]: {
+            position: axisIndex === 0 ? 'left' : 'right',
+          },
+        }),
+        {}
+      ),
     },
   };
 
   const chartData: ChartData<'line', (number | [number, number] | null)[]> = {
     labels: labels,
-    datasets: data.map((d) => ({
-      type: 'line' as const,
-      label: d.label,
-      data: d.data,
-    })),
+    datasets: data.reduce(
+      (ret, axis, axisIndex) => [
+        ...ret,
+        ...axis.map((d) => ({
+          type: 'line' as const,
+          label: d.label,
+          data: d.data,
+          yAxisID: `y${axisIndex}`,
+        })),
+      ],
+      []
+    ),
   };
 
   return <Chart type='line' options={options} data={chartData} />;

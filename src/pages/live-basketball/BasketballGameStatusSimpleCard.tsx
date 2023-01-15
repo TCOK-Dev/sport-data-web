@@ -1,8 +1,12 @@
 import { FC, PropsWithChildren, useMemo } from 'react';
 import { LineChart } from '../../components/LineChart';
 import SimpleLineChart from '../../components/SimpleLineChart';
+import { BasketballGameScore } from '../../types/basketball-game-score.types';
 import { BasketballGame } from '../../types/basketball-game.types';
 import { secs2Mins, toNumber } from '../../utils/math.utils';
+
+const extractOverUnder = (data: BasketballGame | BasketballGameScore) =>
+  toNumber((data.awayOverUnder ?? '').split(' ')?.[0] ?? '');
 
 const BasketballGameStatusSimpleCard: FC<
   PropsWithChildren<{ data: BasketballGame }>
@@ -11,10 +15,7 @@ const BasketballGameStatusSimpleCard: FC<
     return data.playedTime / 60;
   }, [data.playedTime]);
 
-  const overUnder = useMemo(
-    () => toNumber((data.awayOverUnder ?? '').split(' ')?.[0] ?? ''),
-    [data.awayOverUnder]
-  );
+  const overUnder = useMemo(() => extractOverUnder(data), [data]);
 
   const paces = useMemo(() => {
     const pace = (toNumber(data.awayScore) + toNumber(data.homeScore)) / time;
@@ -95,14 +96,28 @@ const BasketballGameStatusSimpleCard: FC<
             <LineChart
               labels={(data.scores ?? []).map((item) => item.playedTime)}
               data={[
-                {
-                  label: 'Away Score',
-                  data: (data.scores ?? []).map((item) => item.awayScore),
-                },
-                {
-                  label: 'Home Score',
-                  data: (data.scores ?? []).map((item) => item.homeScore),
-                },
+                [
+                  {
+                    label: 'Away Team Score',
+                    data: (data.scores ?? []).map((item) => item.awayScore),
+                  },
+                  {
+                    label: 'Home Team Score',
+                    data: (data.scores ?? []).map((item) => item.homeScore),
+                  },
+                ],
+                [
+                  {
+                    label: 'Start Over / Under',
+                    data: (data.scores ?? []).map(() => overUnder),
+                  },
+                  {
+                    label: 'Over / Under',
+                    data: (data.scores ?? []).map((item) =>
+                      extractOverUnder(item)
+                    ),
+                  },
+                ],
               ]}
             />
           </td>
