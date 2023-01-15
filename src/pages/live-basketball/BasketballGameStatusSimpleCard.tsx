@@ -109,7 +109,7 @@ const BasketballGameStatusSimpleCard: FC<
         <tr className='br-green'>
           <td colSpan={4} style={{ height: 300 }}>
             <LineChart
-              labels={chartData.map((item) => item.playedTime)}
+              labels={chartData.map((item) => min2Readable(item.playedTime))}
               data={[
                 [
                   {

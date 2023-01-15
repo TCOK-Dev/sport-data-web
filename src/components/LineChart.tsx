@@ -12,7 +12,6 @@ import {
   Tooltip,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
-import { min2Readable, toNumber } from '../utils/math.utils';
 
 ChartJS.register(
   CategoryScale,
@@ -42,13 +41,13 @@ export function LineChart({
     cornerRadius: 4,
     maintainAspectRatio: false,
     scales: {
-      x: {
-        ticks: {
-          callback: function (value: any, index: any, ticks: any) {
-            return min2Readable(toNumber(value) / 60);
-          },
-        },
-      },
+      // x: {
+      //   ticks: {
+      //     callback: function (value: any, index: any, ticks: any) {
+      //       return min2Readable(toNumber(value) / 60);
+      //     },
+      //   },
+      // },
       // ...data.slice(0, 2).reduce(
       //   (ret, axis, axisIndex) => ({
       //     ...ret,
