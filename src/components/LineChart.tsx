@@ -61,7 +61,7 @@ export function LineChart({
       //   }),
       //   {}
       // ),
-      y1: {
+      y: {
         position: 'left' as const,
         ticks: {
           stepSize: 1,
@@ -71,9 +71,9 @@ export function LineChart({
           drawBorder: false,
         },
       },
-      y2: {
+      y1: {
         position: 'right' as const,
-        ticks: { 
+        ticks: {
           beginAtZero: true,
         },
         grid: {
@@ -92,7 +92,7 @@ export function LineChart({
           type: 'line' as const,
           label: d.label,
           data: d.data,
-          yAxisID: `y${axisIndex}`,
+          yAxisID: axisIndex ? `y${axisIndex}` : 'y',
         })),
       ],
       []
