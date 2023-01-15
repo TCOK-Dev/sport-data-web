@@ -3,7 +3,7 @@ import { LineChart } from '../../components/LineChart';
 import SimpleLineChart from '../../components/SimpleLineChart';
 import { BasketballGameScore } from '../../types/basketball-game-score.types';
 import { BasketballGame } from '../../types/basketball-game.types';
-import { secs2Mins, toNumber } from '../../utils/math.utils';
+import { min2Readable, toNumber } from '../../utils/math.utils';
 
 const extractOverUnder = (data: BasketballGame | BasketballGameScore) =>
   toNumber((data.awayOverUnder ?? '').split(' ')?.[0] ?? '');
@@ -57,7 +57,7 @@ const BasketballGameStatusSimpleCard: FC<
               }}
             >
               {data.quarter ? <b>({data.quarter ?? ''})</b> : null}
-              <span>{secs2Mins(time)}</span>
+              <span>{min2Readable(time)}</span>
             </h3>
           </th>
           <th className={liveVsPaces[1] > 0 ? 'bg-green' : 'bg-red'}>

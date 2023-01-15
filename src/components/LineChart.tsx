@@ -12,7 +12,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
-import { secs2Mins } from '../utils/math.utils';
+import { min2Readable, toNumber } from '../utils/math.utils';
 
 ChartJS.register(
   CategoryScale,
@@ -45,7 +45,7 @@ export function LineChart({
       x: {
         ticks: {
           callback: function (value: any, index: any, ticks: any) {
-            return secs2Mins(value);
+            return min2Readable(toNumber(value) / 60);
           },
         },
       },

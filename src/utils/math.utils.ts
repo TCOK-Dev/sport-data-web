@@ -3,7 +3,7 @@ export const toNumber = (str: any) => {
   return n ? n : 0;
 };
 
-export const secs2Mins = (str: any) => {
+export const min2Readable = (str: any) => {
   const seconds = toNumber(str);
   return `${Math.floor(seconds).toFixed(0)} : ${(
     (seconds - Math.floor(seconds)) *
