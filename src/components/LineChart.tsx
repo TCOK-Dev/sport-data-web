@@ -49,15 +49,38 @@ export function LineChart({
           },
         },
       },
-      ...data.slice(0, 2).reduce(
-        (ret, axis, axisIndex) => ({
-          ...ret,
-          [`y${axisIndex + 1}`]: {
-            position: axisIndex === 0 ? ('left' as const) : ('right' as const),
-          },
-        }),
-        {}
-      ),
+      // ...data.slice(0, 2).reduce(
+      //   (ret, axis, axisIndex) => ({
+      //     ...ret,
+      //     [`y${axisIndex + 1}`]: {
+      //       position: axisIndex === 0 ? ('left' as const) : ('right' as const),
+      //       grid: {
+      //         drawBorder: false,
+      //       },
+      //     },
+      //   }),
+      //   {}
+      // ),
+      y1: {
+        position: 'left' as const,
+        ticks: {
+          stepSize: 1,
+          beginAtZero: true,
+        },
+        grid: {
+          drawBorder: false,
+        },
+      },
+      y2: {
+        position: 'right' as const,
+        ticks: {
+          stepSize: 1,
+          beginAtZero: true,
+        },
+        grid: {
+          drawBorder: false,
+        },
+      },
     },
   };
 
