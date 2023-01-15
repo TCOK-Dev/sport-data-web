@@ -5,7 +5,7 @@ export const toNumber = (str: any) => {
 
 export const min2Readable = (str: any) => {
   const seconds = toNumber(str);
-  return `${Math.floor(seconds).toFixed(0)} : ${(
+  return `${Math.floor(seconds).toFixed(0)}:${(
     (seconds - Math.floor(seconds)) *
     60
   ).toFixed(0)}`;
