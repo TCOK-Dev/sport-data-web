@@ -11,7 +11,13 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
   const [data, setData] = useState<Array<BasketballGame>>([]);
 
   const top3Games: Array<BasketballGame> = useMemo(() => {
-    return data.slice(0, 3);
+    return data
+      .filter(
+        (item) =>
+          item.playedTime > 300 &&
+          Math.abs(item.awayScore - item.homeScore) > 10
+      )
+      .slice(0, 3);
   }, [data]);
 
   const nbaGames: Array<BasketballGame> = useMemo(() => {
