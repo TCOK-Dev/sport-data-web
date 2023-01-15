@@ -73,8 +73,7 @@ export function LineChart({
       },
       y2: {
         position: 'right' as const,
-        ticks: {
-          stepSize: 1,
+        ticks: { 
           beginAtZero: true,
         },
         grid: {
