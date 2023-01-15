@@ -65,19 +65,17 @@ export function LineChart({
         position: 'left' as const,
         ticks: {
           stepSize: 1,
-          beginAtZero: true,
         },
         grid: {
           drawBorder: false,
+          drawGrid: false,
         },
       },
       y1: {
         position: 'right' as const,
-        ticks: {
-          beginAtZero: true,
-        },
         grid: {
           drawBorder: false,
+          drawGrid: false,
         },
       },
     },
