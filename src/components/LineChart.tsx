@@ -68,8 +68,6 @@ export function LineChart({
         },
         grid: {
           drawBorder: false,
-        },
-        gridLines: {
           color: 'rgba(0, 0, 0, 0)',
         },
       },
@@ -77,8 +75,6 @@ export function LineChart({
         position: 'right' as const,
         grid: {
           drawBorder: false,
-        },
-        gridLines: {
           color: 'rgba(0, 0, 0, 0)',
         },
       },
