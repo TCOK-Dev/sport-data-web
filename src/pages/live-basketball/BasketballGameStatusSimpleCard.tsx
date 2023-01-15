@@ -32,6 +32,11 @@ const BasketballGameStatusSimpleCard: FC<
     [liveProjected, paces]
   );
 
+  const chartData = useMemo(
+    () => (data.scores ?? []).slice(-30),
+    [data.scores]
+  );
+
   return (
     <table
       border={1}
@@ -94,28 +99,26 @@ const BasketballGameStatusSimpleCard: FC<
         <tr className='br-green'>
           <td colSpan={4} style={{ height: 300 }}>
             <LineChart
-              labels={(data.scores ?? []).map((item) => item.playedTime)}
+              labels={chartData.map((item) => item.playedTime)}
               data={[
                 [
                   {
                     label: 'Away Team Score',
-                    data: (data.scores ?? []).map((item) => item.awayScore),
+                    data: chartData.map((item) => item.awayScore),
                   },
                   {
                     label: 'Home Team Score',
-                    data: (data.scores ?? []).map((item) => item.homeScore),
+                    data: chartData.map((item) => item.homeScore),
                   },
                 ],
                 [
                   {
                     label: 'Start Over / Under',
-                    data: (data.scores ?? []).map(() => overUnder),
+                    data: chartData.map(() => overUnder),
                   },
                   {
                     label: 'Over / Under',
-                    data: (data.scores ?? []).map((item) =>
-                      extractOverUnder(item)
-                    ),
+                    data: chartData.map((item) => extractOverUnder(item)),
                   },
                 ],
               ]}
