@@ -17,6 +17,12 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
           item.playedTime > 300 &&
           Math.abs(item.awayScore - item.homeScore) > 10
       )
+      .sort((a, b) =>
+        Math.abs(a.awayScore - a.homeScore) >
+        Math.abs(b.awayScore - b.homeScore)
+          ? -1
+          : 1
+      )
       .slice(0, 3);
   }, [data]);
 
