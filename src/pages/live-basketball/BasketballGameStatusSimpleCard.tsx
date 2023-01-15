@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren, useMemo } from 'react';
 import { LineChart } from '../../components/LineChart';
 import SimpleLineChart from '../../components/SimpleLineChart';
+import { SHOW_CHART_COUNT } from '../../constants/global';
 import { BasketballGameScore } from '../../types/basketball-game-score.types';
 import { BasketballGame } from '../../types/basketball-game.types';
 import { min2Readable, toNumber } from '../../utils/math.utils';
@@ -33,7 +34,7 @@ const BasketballGameStatusSimpleCard: FC<
   );
 
   const chartData = useMemo(
-    () => (data.scores ?? []).slice(-30),
+    () => (data.scores ?? []).slice(-SHOW_CHART_COUNT),
     [data.scores]
   );
 
