@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, Typography } from '@mui/material';
+import { CircularProgress, Grid, Typography, Stack } from '@mui/material';
 import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { REFRESH_TIME_INTERVAL } from '../../constants/global';
@@ -34,7 +34,12 @@ const LiveBasketballDetail: FC<PropsWithChildren<{}>> = () => {
   return (
     <div>
       {data ? (
-        <BasketballGameStatusSimpleCard data={data} isDetail={true} />
+        <Stack spacing={2}>
+          <Typography variant='h5' color='primary' fontWeight={500}>
+            {data.title}
+          </Typography>
+          <BasketballGameStatusSimpleCard data={data} isDetail={true} />
+        </Stack>
       ) : (
         <Grid container spacing={1} alignItems='center'>
           <Grid item>
