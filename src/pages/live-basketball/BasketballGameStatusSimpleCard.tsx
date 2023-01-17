@@ -19,8 +19,12 @@ const extractTotalPace = (data: BasketballGame | BasketballGameScore) => {
 };
 
 const BasketballGameStatusSimpleCard: FC<
-  PropsWithChildren<{ data: BasketballGame; onClick?: () => void }>
-> = ({ data, onClick = () => null }) => {
+  PropsWithChildren<{
+    data: BasketballGame;
+    onClick?: () => void;
+    isDetail?: boolean;
+  }>
+> = ({ data, onClick = () => null, isDetail = false }) => {
   const time = useMemo(() => {
     return data.playedTime / 60;
   }, [data.playedTime]);
@@ -42,8 +46,11 @@ const BasketballGameStatusSimpleCard: FC<
   );
 
   const chartData = useMemo(
-    () => (data.scores ?? []).slice(-SHOW_CHART_COUNT),
-    [data.scores]
+    () =>
+      isDetail
+        ? data.scores ?? []
+        : (data.scores ?? []).slice(-SHOW_CHART_COUNT),
+    [data.scores, isDetail]
   );
 
   return (
@@ -98,7 +105,7 @@ const BasketballGameStatusSimpleCard: FC<
       <tbody>
         {/* charts */}
         <tr className='br-green'>
-          <td colSpan={4} style={{ height: 300 }}>
+          <td colSpan={4} style={{ minHeight: 300, height: '100%' }}>
             <LineChart
               labels={chartData.map((item) =>
                 min2Readable(item.playedTime / 60)

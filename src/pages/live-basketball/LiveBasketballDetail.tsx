@@ -34,7 +34,7 @@ const LiveBasketballDetail: FC<PropsWithChildren<{}>> = () => {
   return (
     <div>
       {data ? (
-        <BasketballGameStatusSimpleCard data={data} />
+        <BasketballGameStatusSimpleCard data={data} isDetail={true} />
       ) : (
         <Grid container spacing={1} alignItems='center'>
           <Grid item>
