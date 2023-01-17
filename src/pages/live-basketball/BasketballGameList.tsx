@@ -16,7 +16,7 @@ const BasketballGameList: FC<
       ))}
     </Grid>
   ) : (
-    <Typography variant='h5' align='center' color='GrayText' fontWeight={600}>
+    <Typography variant='h6' align='center' color='GrayText' fontWeight={500}>
       There is no games
     </Typography>
   );
