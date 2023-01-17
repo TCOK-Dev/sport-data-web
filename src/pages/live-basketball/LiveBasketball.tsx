@@ -7,16 +7,18 @@ import basketballGameService from '../../services/basketball-game.services';
 import { BasketballGame } from '../../types/basketball-game.types';
 import BasketballGameList from './BasketballGameList';
 
+const TOP_3_TIME_LIMIT = 300;
+
 const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
   const [data, setData] = useState<Array<BasketballGame>>([]);
 
-  const top3Games: Array<BasketballGame> = useMemo(() => {
-    return data
-      .filter(
-        (item) =>
-          item.playedTime > 300 &&
-          Math.abs(item.awayScore - item.homeScore) > 10
-      )
+  const nbaGames: Array<BasketballGame> = useMemo(() => {
+    return data.filter((game) => game.quarter?.[1] === 'Q');
+  }, [data]);
+
+  const nbaTop3Games: Array<BasketballGame> = useMemo(() => {
+    return nbaGames
+      .filter((item) => item.playedTime > TOP_3_TIME_LIMIT)
       .sort((a, b) =>
         Math.abs(a.awayScore - a.homeScore) >
         Math.abs(b.awayScore - b.homeScore)
@@ -24,15 +26,23 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
           : 1
       )
       .slice(0, 3);
-  }, [data]);
-
-  const nbaGames: Array<BasketballGame> = useMemo(() => {
-    return data.filter((game) => game.quarter?.[1] === 'Q');
-  }, [data]);
+  }, [nbaGames]);
 
   const cgGames: Array<BasketballGame> = useMemo(() => {
     return data.filter((game) => game.quarter?.[1] === 'H');
   }, [data]);
+
+  const cgTop3Games: Array<BasketballGame> = useMemo(() => {
+    return cgGames
+      .filter((item) => item.playedTime > TOP_3_TIME_LIMIT)
+      .sort((a, b) =>
+        Math.abs(a.awayScore - a.homeScore) >
+        Math.abs(b.awayScore - b.homeScore)
+          ? -1
+          : 1
+      )
+      .slice(0, 3);
+  }, [cgGames]);
 
   const loadData = async () => {
     const res = await basketballGameService.getsLive();
@@ -51,18 +61,41 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
 
   return (
     <div>
-      <Typography variant='h4'>Top 3</Typography>
-      <BasketballGameList data={top3Games} />
-
       <TabsContainer
         data={[
           {
             label: 'NBA',
-            node: <BasketballGameList data={nbaGames} />,
+            node: (
+              <div>
+                <Typography variant='h4' color='primary' fontWeight={800}>
+                  Top 3
+                </Typography>
+                <BasketballGameList data={nbaTop3Games} />
+                <br />
+
+                <Typography variant='h4' color='primary' fontWeight={800}>
+                  NBA
+                </Typography>
+                <BasketballGameList data={nbaGames} />
+              </div>
+            ),
           },
           {
             label: 'College',
-            node: <BasketballGameList data={cgGames} />,
+            node: (
+              <div>
+                <Typography variant='h4' color='primary' fontWeight={800}>
+                  Top 3
+                </Typography>
+                <BasketballGameList data={cgTop3Games} />
+                <br />
+
+                <Typography variant='h4' color='primary' fontWeight={800}>
+                  College
+                </Typography>
+                <BasketballGameList data={cgGames} />
+              </div>
+            ),
           },
         ]}
       />

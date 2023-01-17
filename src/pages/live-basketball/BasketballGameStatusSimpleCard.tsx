@@ -1,6 +1,5 @@
 import { FC, PropsWithChildren, useMemo } from 'react';
 import { LineChart } from '../../components/LineChart';
-import SimpleLineChart from '../../components/SimpleLineChart';
 import { SHOW_CHART_COUNT } from '../../constants/global';
 import { BasketballGameScore } from '../../types/basketball-game-score.types';
 import { BasketballGame } from '../../types/basketball-game.types';
@@ -58,6 +57,20 @@ const BasketballGameStatusSimpleCard: FC<
     >
       <thead>
         <tr>
+          <th className='bg-yellow' style={{ width: '35%' }}>
+            {data.awayTeam}
+          </th>
+          <th className='bg-yellow' style={{ width: '15%' }}>
+            {data.awayScore}
+          </th>
+          <th className='bg-blue' style={{ width: '15%' }}>
+            {data.homeScore}
+          </th>
+          <th className='bg-blue' style={{ width: '35%' }}>
+            {data.homeTeam}
+          </th>
+        </tr>
+        <tr>
           <th className={overUnder > 0 ? 'bg-green' : 'bg-red'}>
             <h4 style={{ margin: 0 }}>{Math.abs(overUnder).toFixed(1)}</h4>
           </th>
@@ -79,33 +92,9 @@ const BasketballGameStatusSimpleCard: FC<
             <h4 style={{ margin: 0 }}>{Math.abs(liveVsPaces[1]).toFixed(1)}</h4>
           </th>
         </tr>
-        <tr>
-          <th className='bg-yellow' style={{ width: '35%' }}>
-            {data.awayTeam}
-          </th>
-          <th className='bg-yellow' style={{ width: '15%' }}>
-            {data.awayScore}
-          </th>
-          <th className='bg-green' style={{ width: '15%' }}>
-            {data.homeScore}
-          </th>
-          <th className='bg-green' style={{ width: '35%' }}>
-            {data.homeTeam}
-          </th>
-        </tr>
       </thead>
       <tbody>
-        {/* charts */}
-        <tr className='br-green'>
-          <td colSpan={4}>
-            <SimpleLineChart
-              data={[
-                [paces[1], liveVsPaces[1]],
-                [overUnder, 0],
-              ]}
-            />
-          </td>
-        </tr>
+        {/* charts */} 
         <tr className='br-green'>
           <td colSpan={4} style={{ height: 300 }}>
             <LineChart
