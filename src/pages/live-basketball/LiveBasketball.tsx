@@ -26,8 +26,6 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
     if (res.code === APIResponseCode.SUCCESS) {
       setData(res.data ?? []);
     }
-
-    setTimeout(loadData, REFRESH_TIME_INTERVAL);
   };
 
   const handleGame = (value: BasketballGame) => {
@@ -36,7 +34,11 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
   };
 
   useEffect(() => {
-    loadData();
+    const interval = setInterval(loadData, REFRESH_TIME_INTERVAL);
+
+    return () => {
+      clearInterval(interval);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
