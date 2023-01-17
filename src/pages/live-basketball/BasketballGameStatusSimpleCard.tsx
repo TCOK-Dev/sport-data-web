@@ -128,16 +128,16 @@ const BasketballGameStatusSimpleCard: FC<
                 // ],
                 [
                   {
-                    label: 'Start Over / Under',
-                    data: chartData.map(() => overUnder),
-                  },
-                  {
                     label: 'Over / Under',
                     data: chartData.map((item) => extractOverUnder(item)),
                   },
                   {
                     label: 'Pace',
                     data: chartData.map((item) => extractTotalPace(item)),
+                  },
+                  {
+                    label: 'Start Over / Under',
+                    data: chartData.map(() => overUnder),
                   },
                 ],
               ]}
