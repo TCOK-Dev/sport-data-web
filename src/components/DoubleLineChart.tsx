@@ -29,7 +29,7 @@ export function LineChart({
   data = [],
   labels = [],
 }: {
-  data: Array<{ label: string; data: Array<number> }>;
+  data: Array<Array<{ label: string; data: Array<number> }>>;
   labels?: Array<number | string>;
 }) {
   const options: any = {
@@ -60,33 +60,40 @@ export function LineChart({
       //   }),
       //   {}
       // ),
-      // y: {
-      //   position: 'left' as const,
-      //   ticks: {
-      //     stepSize: 1,
-      //   },
-      //   grid: {
-      //     drawBorder: false,
-      //     color: 'rgba(0, 0, 0, 0)',
-      //   },
-      // },
-      // y1: {
-      //   position: 'right' as const,
-      //   grid: {
-      //     drawBorder: false,
-      //     color: 'rgba(0, 0, 0, 0)',
-      //   },
-      // },
+      y: {
+        position: 'left' as const,
+        ticks: {
+          stepSize: 1,
+        },
+        grid: {
+          drawBorder: false,
+          color: 'rgba(0, 0, 0, 0)',
+        },
+      },
+      y1: {
+        position: 'right' as const,
+        grid: {
+          drawBorder: false,
+          color: 'rgba(0, 0, 0, 0)',
+        },
+      },
     },
   };
 
   const chartData: ChartData<'line', (number | [number, number] | null)[]> = {
     labels: labels,
-    datasets: data.map((d) => ({
-      type: 'line' as const,
-      label: d.label,
-      data: d.data,
-    })),
+    datasets: data.slice(0, 2).reduce(
+      (ret, axis, axisIndex) => [
+        ...ret,
+        ...axis.map((d) => ({
+          type: 'line' as const,
+          label: d.label,
+          data: d.data,
+          yAxisID: axisIndex ? `y${axisIndex}` : 'y',
+        })),
+      ],
+      []
+    ),
   };
 
   return <Chart type='line' options={options} data={chartData} />;
