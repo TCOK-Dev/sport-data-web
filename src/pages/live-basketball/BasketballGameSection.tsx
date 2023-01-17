@@ -6,8 +6,12 @@ import BasketballGameList from './BasketballGameList';
 const TOP_3_TIME_LIMIT = 300;
 
 const BasketballGameSection: FC<
-  PropsWithChildren<{ data?: Array<BasketballGame>; title?: string }>
-> = ({ data = [], title = 'Games' }) => {
+  PropsWithChildren<{
+    data?: Array<BasketballGame>;
+    title?: string;
+    onClickGame?: (p: BasketballGame) => void;
+  }>
+> = ({ data = [], title = 'Games', onClickGame = () => null }) => {
   const top3Games: Array<BasketballGame> = useMemo(() => {
     return data
       .filter((item) => item.playedTime > TOP_3_TIME_LIMIT)
@@ -25,13 +29,13 @@ const BasketballGameSection: FC<
       <Typography variant='h5' color='primary' fontWeight={500}>
         Top 3
       </Typography>
-      <BasketballGameList data={data} />
+      <BasketballGameList data={data} onClick={onClickGame} />
       <br />
 
       <Typography variant='h5' color='primary' fontWeight={500}>
         {title}
       </Typography>
-      <BasketballGameList data={top3Games} />
+      <BasketballGameList data={top3Games} onClick={onClickGame} />
     </div>
   );
 };

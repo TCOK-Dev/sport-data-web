@@ -19,8 +19,8 @@ const extractTotalPace = (data: BasketballGame | BasketballGameScore) => {
 };
 
 const BasketballGameStatusSimpleCard: FC<
-  PropsWithChildren<{ data: BasketballGame }>
-> = ({ data }) => {
+  PropsWithChildren<{ data: BasketballGame; onClick?: () => void }>
+> = ({ data, onClick = () => null }) => {
   const time = useMemo(() => {
     return data.playedTime / 60;
   }, [data.playedTime]);
@@ -54,6 +54,7 @@ const BasketballGameStatusSimpleCard: FC<
         borderCollapse: 'collapse',
         borderColor: 'lightgray',
       }}
+      onClick={onClick}
     >
       <thead>
         <tr>
@@ -94,7 +95,7 @@ const BasketballGameStatusSimpleCard: FC<
         </tr>
       </thead>
       <tbody>
-        {/* charts */} 
+        {/* charts */}
         <tr className='br-green'>
           <td colSpan={4} style={{ height: 300 }}>
             <LineChart

@@ -5,8 +5,11 @@ import { APIResponseCode } from '../../services/apiResponse';
 import basketballGameService from '../../services/basketball-game.services';
 import { BasketballGame } from '../../types/basketball-game.types';
 import BasketballGameSection from './BasketballGameSection';
+import { useNavigate } from 'react-router-dom';
 
 const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
+  const navigate = useNavigate();
+
   const [data, setData] = useState<Array<BasketballGame>>([]);
 
   const nbaGames: Array<BasketballGame> = useMemo(() => {
@@ -27,6 +30,10 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
     setTimeout(loadData, REFRESH_TIME_INTERVAL);
   };
 
+  const handleGame = (value: BasketballGame) => {
+    navigate(value.id);
+  };
+
   useEffect(() => {
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,11 +45,23 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
         data={[
           {
             label: 'NBA',
-            node: <BasketballGameSection title='NBA' data={nbaGames} />,
+            node: (
+              <BasketballGameSection
+                title='NBA'
+                data={nbaGames}
+                onClickGame={handleGame}
+              />
+            ),
           },
           {
             label: 'College',
-            node: <BasketballGameSection title='College' data={cgGames} />,
+            node: (
+              <BasketballGameSection
+                title='College'
+                data={cgGames}
+                onClickGame={handleGame}
+              />
+            ),
           },
         ]}
       />
