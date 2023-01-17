@@ -29,13 +29,13 @@ const BasketballGameSection: FC<
       <Typography variant='h5' color='primary' fontWeight={500}>
         Top 3
       </Typography>
-      <BasketballGameList data={data} onClick={onClickGame} />
+      <BasketballGameList data={top3Games} onClick={onClickGame} />
       <br />
 
       <Typography variant='h5' color='primary' fontWeight={500}>
         {title}
       </Typography>
-      <BasketballGameList data={top3Games} onClick={onClickGame} />
+      <BasketballGameList data={data} onClick={onClickGame} />
     </div>
   );
 };

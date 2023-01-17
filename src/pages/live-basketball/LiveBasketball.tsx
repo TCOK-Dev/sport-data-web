@@ -31,7 +31,8 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
   };
 
   const handleGame = (value: BasketballGame) => {
-    navigate(value.id);
+    console.log(value);
+    navigate(`/${value.id}`);
   };
 
   useEffect(() => {
