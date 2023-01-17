@@ -1,4 +1,5 @@
-import { CircularProgress, Grid, Typography, Stack } from '@mui/material';
+import { Close } from '@mui/icons-material';
+import { CircularProgress, Grid, IconButton, Typography } from '@mui/material';
 import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { REFRESH_TIME_INTERVAL } from '../../constants/global';
@@ -6,8 +7,11 @@ import { APIResponseCode } from '../../services/apiResponse';
 import basketballGameService from '../../services/basketball-game.services';
 import { BasketballGame } from '../../types/basketball-game.types';
 import BasketballGameStatusSimpleCard from './BasketballGameStatusSimpleCard';
+import { useNavigate } from 'react-router-dom';
 
 const LiveBasketballDetail: FC<PropsWithChildren<{}>> = () => {
+  const navigate = useNavigate();
+
   const { basketballId = '' } = useParams();
 
   const [data, setData] = useState<BasketballGame>();
@@ -18,6 +22,10 @@ const LiveBasketballDetail: FC<PropsWithChildren<{}>> = () => {
     if (res.code === APIResponseCode.SUCCESS) {
       setData(res.data);
     }
+  };
+
+  const handleClose = () => {
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -34,12 +42,21 @@ const LiveBasketballDetail: FC<PropsWithChildren<{}>> = () => {
   return (
     <div>
       {data ? (
-        <Stack spacing={2}>
-          <Typography variant='h5' color='primary' fontWeight={500}>
-            {data.title}
-          </Typography>
+        <div>
+          <Grid container justifyContent='space-between' alignItems='center'>
+            <Grid item>
+              <Typography variant='h5' color='primary' fontWeight={500}>
+                {data.title}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <IconButton onClick={handleClose} color='error'>
+                <Close />
+              </IconButton>
+            </Grid>
+          </Grid>
           <BasketballGameStatusSimpleCard data={data} isDetail={true} />
-        </Stack>
+        </div>
       ) : (
         <Grid container spacing={1} alignItems='center'>
           <Grid item>
