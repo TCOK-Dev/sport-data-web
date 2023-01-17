@@ -53,6 +53,7 @@ const BasketballGameStatusSimpleCard: FC<
         width: '100%',
         borderCollapse: 'collapse',
         borderColor: 'lightgray',
+        cursor: 'pointer',
       }}
       onClick={onClick}
     >

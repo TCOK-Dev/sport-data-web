@@ -21,6 +21,8 @@ const LiveBasketballDetail: FC<PropsWithChildren<{}>> = () => {
   };
 
   useEffect(() => {
+    loadData();
+
     const interval = setInterval(loadData, REFRESH_TIME_INTERVAL);
 
     return () => {
