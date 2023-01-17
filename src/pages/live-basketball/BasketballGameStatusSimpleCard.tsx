@@ -116,16 +116,16 @@ const BasketballGameStatusSimpleCard: FC<
                 min2Readable(item.playedTime / 60)
               )}
               data={[
-                [
-                  {
-                    label: 'Away Team Score',
-                    data: chartData.map((item) => item.awayScore),
-                  },
-                  {
-                    label: 'Home Team Score',
-                    data: chartData.map((item) => item.homeScore),
-                  },
-                ],
+                // [
+                //   {
+                //     label: 'Away Team Score',
+                //     data: chartData.map((item) => item.awayScore),
+                //   },
+                //   {
+                //     label: 'Home Team Score',
+                //     data: chartData.map((item) => item.homeScore),
+                //   },
+                // ],
                 [
                   {
                     label: 'Start Over / Under',
