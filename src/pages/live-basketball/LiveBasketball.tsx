@@ -84,13 +84,13 @@ const LiveBasketball: FC<PropsWithChildren<{}>> = () => {
             label: 'College',
             node: (
               <div>
-                <Typography variant='h4' color='primary' fontWeight={800}>
+                <Typography variant='h4' color='primary' fontWeight={600}>
                   Top 3
                 </Typography>
                 <BasketballGameList data={cgTop3Games} />
                 <br />
 
-                <Typography variant='h4' color='primary' fontWeight={800}>
+                <Typography variant='h4' color='primary' fontWeight={600}>
                   College
                 </Typography>
                 <BasketballGameList data={cgGames} />
